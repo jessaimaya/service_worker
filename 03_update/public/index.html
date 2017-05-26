@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Update | Service Worker</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-diamond" style="font-size:4em">&hearts;</span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Service Worker</h1>
+								<p>Ejemplo simple de la tecnología offline <a href="https://www.w3.org/TR/service-workers-1/">Service Worker</a></p>
+                <p>Para más instrucciones mira la consola del navegador.</p>
+							</div>
+						</div>
+            <nav>
+							<ul>
+								<li><img alt="" src="images/01.png"/></li>
+								<li><img alt="" src="images/02.png"/></li>
+								<li><img alt="" src="images/03.png"/></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Footer -->
+					<footer id="footer">
+
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+      <!-- 
+      ****************************************
+      ******        SERVICE WORKER        ****
+      **************************************** 
+      -->
+      <script type="text/javascript">
+        navigator.serviceWorker.register("./sw.js").then(function(){
+        console.log("Se llama al archivo sw.js");
+        });
+      </script>
+      
+	</body>
+</html>

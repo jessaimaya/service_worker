@@ -1,0 +1,21 @@
+{
+  "name": "background-sync-service-worker",
+  "version": "1.0.0",
+  "description": "Ejemplo simple de la tecnologia: service-worker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "keywords": [
+    "service",
+    "worker"
+  ],
+  "author": "Jessaí Maya",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "fetch-sync": "^2.0.0",
+    "require": "^2.4.20"
+  }
+}

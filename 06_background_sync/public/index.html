@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Background Sync - Service Worker</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style type="text/css">
+      .evento{text-align: left;
+    border: solid 2px #fff;
+    padding: 1em;
+        margin: 1em;}
+     .cat{display:block;margin: 1em auto;}
+    </style>
+    
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="content">
+							<div class="inner">
+								<h1>Background sync</h1>
+
+                <div id="connectionStatus"></div>
+                <p>Click on the button below to make an HTTP request.<p>
+                  <img id="result" class="cat">
+                <button id="requestButton">Make an HTTP request - do it!</button>
+                
+							</div>
+						</div>
+					</header>
+
+				<!-- Footer -->
+					<footer id="footer">
+
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/eventos.json"></script>
+      <script src="../node_modules/fetch-sync/dist/fetch-sync.min.js"></script>
+
+
+      <!-- 
+      ****************************************
+      ******        SERVICE WORKER        ****
+      **************************************** 
+      -->
+      <script type="text/javascript">
+       
+        if ('serviceWorker' in navigator) {
+          const headers = new Headers();
+          
+          headers.append('Authorization', 'Service-Worker-Allowed');
+          
+          navigator.serviceWorker.register('./sw.js', {scope: './'})
+                   .then(function(registration) {
+                     //Notification.requestPermission();
+                     return fetchSync.init({
+                       url: 'node_modules/fetch-sync/dist/fetch-sync.sw.js'
+                     })
+                     
+                   })
+          
+          
+        }else{
+          document.getElementById('requestButton').addEventListener('click', function(){
+            console.log('Fallback to fetch the image as usual');
+          })
+        }
+
+       
+       
+      </script>
+
+      <script>
+       $(function(){
+         var result = document.querySelector('#result')
+         var getImage = 'https://thecatapi.com/api/images/get?format=src&type=gif'
+         
+         document.getElementById('requestButton').addEventListener('click', () => {
+           console.log('Click!');
+           fetchSync(getImage)
+             .then(function(response){
+               console.log('Response...', response);
+               return response.blob();
+             }).then(function(blob){
+               console.log('Blob: ', blob);
+               result.src = URL.createObjectURL(blob)
+               return true;
+             }).catch(function(err){
+               console.log('Error');
+             })
+
+
+         });
+         
+          function isOnline(){
+            var connectionStatus = document.getElementById('connectionStatus');
+            if(navigator.onLine){
+              connectionStatus.innerHTML = 'You are currently online!';
+            } else {
+              connectionStatus.innerHTML = 'You are currently offline. Any requests made will be queued and synced as soon as you are connected again';
+            }
+          }
+
+          window.addEventListener('online', isOnline);
+          window.addEventListener('offline', isOnline);
+          isOnline();
+          
+        });
+      </script>
+      
+	</body>
+</html>
+
+
+
+/* global fetchSync:false */
+
+var GET_ME_A_CAT = 'https://thecatapi.com/api/images/get?format=src&type=gif'
+
+var main = document.querySelector('#main')
+var error = document.querySelector('#error')
+var waitingWorker = document.querySelector('#waiting-worker')
+var waitingResult = document.querySelector('#waiting-result')
+var makeRequestBtn = document.querySelector('#make-request')
+var result = document.querySelector('#result')
+
+var request = null
+
+if (!navigator.serviceWorker) {
+main.style.display = 'none'
+error.style.display = 'block'
+error.innerText = 'Service Workers not supported :\'-('
+} else {
+navigator.serviceWorker
+.register('./sw.js', {scope: './'})
+.then(function () {
+return fetchSync.init()
+})
+.then(function () {
+waitingWorker.style.display = 'none'
+main.style.display = 'block'
+})
+.catch(function (err) {
+main.style.display = 'none'
+error.style.display = 'block'
+error.innerText = err.message
+throw err
+})
+}
+
+function makeRequest () {
+if (request) {
+return
+}
+
+waitingResult.style.display = 'block'
+
+request = fetchSync(GET_ME_A_CAT)
+.then(function (response) {
+return response.blob()
+})
+.then(function (blob) {
+result.src = URL.createObjectURL(blob)
+request = false
+waitingResult.style.display = 'none'
+makeRequestBtn.style.display = 'none'
+})
+.catch(function (err) {
+main.style.display = 'none'
+error.style.display = 'block'
+error.innerText = err.message
+throw err
+})
+}

@@ -1,0 +1,4 @@
+var eventos = [
+    // {title:"Evento 2", desc: "Este evento ha sido creado recientemente."},
+    {title:"Evento 1", desc: "Ejemplo de un service worker conectado al servicio de push notifications cuando se encuentre un nuevo evento."}
+];

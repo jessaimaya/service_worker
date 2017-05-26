@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Simple Service Worker</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style type="text/css">
+      .article.hide{display:none !important;}
+    </style>
+    
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="content">
+							<div class="inner">
+								<h1>Service Worker</h1>
+								<p>
+                  Service workers essentially act as proxy servers that sit between web applications, and the browser and network (when available). They are intended to (amongst other things) enable the creation of effective offline experiences, intercepting network requests and taking appropriate action based on whether the network is available and updated assets reside on the server. They will also allow access to push notifications and background sync APIs.
+                </p>
+                <p>
+                  A service worker is an event-driven worker registered against an origin and a path. It takes the form of a JavaScript file that can control the web page/site it is associated with, intercepting and modifying navigation and resource requests, and caching resources in a very granular fashion to give you complete control over how your app behaves in certain situations (the most obvious one being when the network is not available.)
+                </p>
+							</div>
+						</div>
+            <nav>
+							<ul>
+								<li><a href="#" data-id="1" class="article">Leer más tarde</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Footer -->
+					<footer id="footer">
+
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+      <!-- 
+      ****************************************
+      ******        SERVICE WORKER        ****
+      **************************************** 
+      -->
+      <script type="text/javascript">
+        navigator.serviceWorker.register("./sw.js").then(function(){
+        console.log("Se llama al archivo sw.js");
+        });
+      </script>
+
+      <script>
+        /***** Service Worker On Demand ****/
+
+        document.querySelector('.article').addEventListener('click', function(event) {
+          event.preventDefault();
+          console.log("Downloading...");
+          var btn = document.querySelector('.article');
+        btn.className += ' hide';
+          caches.open('demand_sw').then(function(cache) {
+        
+            cache.addAll(["articulo.html"]);
+
+              console.log("Downloaded");
+        
+          });
+          
+        });
+      </script>
+      
+	</body>
+</html>
