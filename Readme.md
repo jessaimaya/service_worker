@@ -4,7 +4,7 @@ Este repositorio contiene ejemplos de uso de la tecnología **Service Worker** q
 
 Cada carpeta corresponde a un ejemplo. Dentro de cada carpeta se encuentra un _Readme_ donde se explica la tecnología y el cómo ejecutar el ejemplo.
 
-Para poder entender lo que es y el cómo funciona esta tecnología, se recomienda leer primero el archivo:   [_ServiceWorker.md_](./ServiceWorker.md)
+Para poder entender lo que es y el cómo funciona esta tecnología, se recomienda leer primero el archivo:   [_ServiceWorker_](./ServiceWorker.md)
 
 Para poder usar los ejemplos se tiene que tener en consideración la compatibilidad de la tecnología con los diferentes navegadores.
 
