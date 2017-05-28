@@ -14,7 +14,7 @@ Una ves instalado el ejemplo, tendremos la siguiente estructura de archivos.
 │̣__node_modules/
 │__public/
 |____assets/
-|____images
+|____images/
 |____index.html
 |____sw.js
 |__package.json
@@ -33,19 +33,21 @@ Al abrir esta ruta, deberemos consultar la consola de nuestro navegador para ver
 ![Simple Service Worker - Instalación](./public/images/sw_01.jpg)
 
 Para estar seguros de que se instaló correctamente debemos ir, en la consola de comandos, a Applications -> Service Workers. Ahí podremos ver el _service worker_ instalado y su _status_ actual.
+
 ![Simple Service Worker - Status](./public/images/sw_02.jpg)
 
 
 Vayamos a la terminal donde se encuentra corriendo el servidor y detengamos el proceso para simular la caida de un servidor, o si se prefiere, dentro de la consola del navegador podemos ir a _Network_ y marcar la casilla de _offline_ para tener el mismo resultado.
 
 Una vez detenido el servidor o simulando que estamos _offline_ basta con actualizar la página para que el _service worker_ comience a funcionar y despache los recursos de la petición correspondiente.
+
 ![Simple Service Worker - Status](./public/images/sw_03.jpg)
 
 Como resultado tendremos una serie de errores en la consola debido a que no encuentra los archivos, sin embargo, la página sguirá mostrando el contenido sin ningún problema, ya que al no encontrar el servidor _online_ se activa el _service worker_ como si fuera un _proxy_ y devuelte los recursos que se descargaron con anterioridad.
 
 ### Explicación
 En sí, son muy sencillos los pasos en este ejemplo y en los siguientes son los mismo partiendo de lo siguiente:
-##### Index.html
+#### Index.html
 Este archivo es como cualquier otro, sólo que llama un archivo que contiene un _service worker_
 ``` html
  <script type="text/javascript">
@@ -54,7 +56,7 @@ Este archivo es como cualquier otro, sólo que llama un archivo que contiene un 
         });
       </script>
 ```
-##### sw.js
+#### sw.js
 Éste es el archivo que contiene el _service worker_ al cual se llama desde _index.html_.
 Consta de dos funciones o eventos: **_install_** y **_fetch_**.
 ```javascript
