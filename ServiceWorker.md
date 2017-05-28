@@ -1,6 +1,6 @@
 # Service Worker
 
-&nbsp; &nbsp;&nbsp;&nbsp;**_Service worker_** es un programa que corre en el _background_ del navegador, obteniendo independencia de la página que se visita. Esta nueva tecnología ofrece características a los desarrolladores para brindar una mejor experiencia al usuario en el campo del **_offline_**.
+&nbsp; &nbsp;&nbsp;&nbsp;**_Service worker_** es un programa que corre en el _background_ del navegador, obteniendo independencia de la página que se visita. Esta nueva tecnología ofrece características a los desarrolladores para brindar una mejor experiencia al usuario en el campo de lo **_offline_**.
 
 ## AppCache
 

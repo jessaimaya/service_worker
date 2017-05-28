@@ -43,7 +43,7 @@ Podemos observar que esta página tiene un botón de _Leer más tarde_, lo que a
 
 ![On Demand Service Worker - Status](./public/images/03_sw.jpg)
 
-Al hacerlo, en la consola de nuestro navegador, no imprimirá un mensaje de descarga. Sólo falta ponernos fuera línea para cargar la página sin necesidad de una red.
+Al hacerlo, en la consola de nuestro navegador, imprimirá un mensaje de descarga. Sólo falta ponernos fuera línea para cargar la página sin necesidad de una red.
 
 ![On Demand Service Worker - Status](./public/images/04_sw.jpg)
 
