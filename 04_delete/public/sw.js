@@ -3,7 +3,7 @@ self.addEventListener("install", function(event){
   console.log("Instalando service worker...");
   event.waitUntil(
     caches.open("delete_sw").then(function(cache){
-    //caches.open("update_sw_2").then(function(cache){
+    //caches.open("delete_sw_2").then(function(cache){
       console.log("Service Worker Instalado.")
       console.log("Prueba apagando el servidor y refrescar la página.")
       return cache.addAll([
@@ -45,7 +45,7 @@ self.addEventListener("fetch", function(event){
 
 /***** Service Worker -  Delete ****/
 /* this.addEventListener('activate', function(event) {
- *   var cacheWhitelist = ['update_sw_2'];
+ *   var cacheWhitelist = ['delete_sw_2'];
  *   console.log('Deleting...');
  *   event.waitUntil(
  *     caches.keys().then(function(keyList) {
